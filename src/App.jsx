@@ -3,7 +3,7 @@ import uuid from "react-uuid";
 import "./App.css";
 import TodoList from "./components/TodoList";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "./redux/modules/todosSlice";
+import { __addTodo, addTodo } from "./redux/modules/todosSlice";
 
 function App() {
   // const initialState = [
@@ -34,6 +34,8 @@ function App() {
   // console.log('state', state);
   // console.log('todos', state.todos);
   const dispatch = useDispatch();
+  
+
 
   const addTodoHandler = (event) => {
     event.preventDefault();
@@ -44,7 +46,7 @@ function App() {
       isDone: false,
     };
     // setTodos([...todos, newTodo]);
-    dispatch(addTodo(newTodo));
+    dispatch(__addTodo(newTodo));
     setTitle("");
     setContents("");
   }
