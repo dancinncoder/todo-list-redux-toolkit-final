@@ -91,23 +91,23 @@ const todosSlice = createSlice({
   //     },
   //   },
   // });
-  extraReducers: (builder) => {
-    builder
-      .addCase(__addTodo.pending, (state) => {
-        state.isLoading = true;
-        state.isError = null;
-      })
-      .addCase(__addTodo.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isError = null;
-        state.todos.push(action.payload);
-      })
-      .addCase(__addTodo.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.error = action.payload;
-      });
-  },
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(__addTodo.pending, (state) => {
+  //       state.isLoading = true;
+  //       state.isError = null;
+  //     })
+  //     .addCase(__addTodo.fulfilled, (state, action) => {
+  //       state.isLoading = false;
+  //       state.isError = null;
+  //       state.todos.push(action.payload);
+  //     })
+  //     .addCase(__addTodo.rejected, (state, action) => {
+  //       state.isLoading = false;
+  //       state.isError = true;
+  //       state.error = action.payload;
+  //     });
+  // },
 });
 
 export const { addTodo, deleteTodo, switchTodo } = todosSlice.actions;
