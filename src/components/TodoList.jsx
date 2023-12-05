@@ -1,6 +1,20 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTodo, switchTodo } from "../redux/modules/todosSlice";
 
-function TodoList({ todos, setTodos, isDone }) {
+function TodoList({isDone }) {
+  const todos = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
+
+  const deleteTodoHandler = (todo) => {
+    dispatch(deleteTodo(todo.id));
+  }
+
+  const switchTodoHandler = (todo) => {
+    // setTodos
+    dispatch(switchTodo(todo.id, isDone));
+  }
+
   return (
     <div>
       <h2>{isDone ? "DONELIST" : "TODOLIST"}</h2>
@@ -22,31 +36,11 @@ function TodoList({ todos, setTodos, isDone }) {
               <p>{todo.title}</p>
               <p>{todo.contents}</p>
               <p>{todo.isDone.toString()}</p>
-              <button
-                onClick={function () {
-                  const newTodos = todos.filter(
-                    (filteredTodo) => filteredTodo.id !== todo.id
-                  );
-
-                  setTodos(newTodos);
-                }}
-              >
+              <button onClick={()=> deleteTodoHandler(todo)}>
                 삭제
               </button>
               <button
-                onClick={function () {
-                  // 새로운 배열 생성
-                  const newTodos = todos.map(function (item) {
-                    if (item.id === todo.id) {
-                      return { ...item, isDone: !item.isDone };
-                    } else {
-                      return item;
-                    }
-                  });
-
-                  // setTodos
-                  setTodos(newTodos);
-                }}
+                onClick={()=> switchTodoHandler(todo)}
               >
                 {isDone ? "취소" : "완료"}
               </button>
